@@ -1,122 +1,151 @@
-.opcoes {
-    display: grid;
-    justify-content: center;
-    margin-top: 25px;
+.opcoes{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:28px;
+    margin-top:40px;
 }
 
-.titulo {
-    display: block;
-    margin: auto;
-    max-width: 50%;
-    height: auto;
-    margin-top: 30px;
+
+.titulo{
+    display:block;
+    margin:auto;
+    margin-top:60px;
+    margin-bottom:20px;
+
+    max-width:50%;
+    height:auto;
 }
 
-.botao {
-    width: 150px;
-    height: 90px;
-    cursor: pointer;
-    border-radius: 60px;
-    margin: 10px;
-    border: 3px solid white;
-    box-shadow: 5px 5px 5px rgb(67, 66, 66);
-    background-color: rgba(207, 207, 207, 0.5);
-    color: white;
+.botao{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+
+    width:240px;
+    height:70px;
+
+    background:linear-gradient(
+        135deg,
+        #0f7f63,
+        #0a6b54
+    );
+
+    color:white;
+
+    border:none;
+    border-radius:28px;
+
+    font-size:20px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    box-shadow:0 8px 16px rgba(0,0,0,0.25);
+
+    transition:all 0.25s ease;
 }
-.botao i {
-    font-size:40px;
+
+.botao i{
+    font-size:22px;
 }
+
 
 .jogar .botao{
-    background-color: rgb(5, 127, 102);
+    background:linear-gradient(
+        135deg,
+        #10a37f,
+        #0d8c6c
+    );
+
+    font-size:22px;
 }
 
-section{
-    text-align: center;
+
+.botao:hover{
+    transform:translateY(-3px) scale(1.03);
+
+    background:white;
+    color:#0f7f63;
+
+    box-shadow:0 10px 20px rgba(0,0,0,0.35);
 }
 
-p{
-    font-size: 1.2rem;
-    margin-bottom: 8px;
-    font-weight: bold;
+
+.botao:active{
+    transform:translateY(2px);
+
+    box-shadow:0 4px 8px rgba(0,0,0,0.25);
 }
 
 .a4s{
-    position: absolute;
-    top: 25px;
-    left: 20px;
-    width: 60px;
-    height: 60px;
+    position:absolute;
+
+    top:25px;
+    left:20px;
+
+    width:60px;
+    height:60px;
+
+    transition:transform 0.2s ease;
 }
 
-.botao:hover {
-    background-color: rgb(255, 255, 255);
-    transform: scale(1.02); /* Efeito de zoom ao passar o mouse sobre o card */
-    color: rgb(5, 127, 102);
-    border-color:rgb(5, 92, 74);
+.a4s:hover{
+    transform:scale(1.08);
 }
 
-.botao:active {
-    box-shadow: 0 5px 5px rgba(146, 240, 173);
-    transform: translateY(4px);
+section{
+    text-align:center;
 }
 
 
-@media (max-width: 1024px){
+/* ---------------- RESPONSIVIDADE ---------------- */
+
+@media (max-width:1024px){
 
     .titulo{
-        margin-top: 80px;
-        margin-bottom: 40px;
-        max-width: 75%;
+        margin-top:80px;
+        margin-bottom:40px;
+        max-width:75%;
     }
 
-    .a4s{
-        left: 20px;
-        width: 60px;
-        height: 60px;
-    }
+    .botao{
+        width:240px;
+        height:100px;
 
-    .botao {
-        width: 210px;
-        height: 120px;
-        margin: 20px;
-    }
-
-    p{
-        font-size: 2rem;
+        font-size:26px;
     }
 
     .botao i{
-        font-size: 3.5rem;
+        font-size:36px;
     }
 
 }
 
-@media (max-width: 700px) {
-    
+
+@media (max-width:700px){
+
     .titulo{
-        margin-top: 80px;
-        max-width: 90%;
-        margin-bottom: 5px;
+        margin-top:80px;
+        margin-bottom:20px;
+        max-width:90%;
     }
 
     .a4s{
-        left: 20px;
-        width: 45px;
-        height: 45px;
+        width:45px;
+        height:45px;
     }
 
-    .botao {
-        width: 130px;
-        height: 80px;
-        margin: 15px;
-    }
+    .botao{
+        width:160px;
+        height:80px;
 
-    p{
-        font-size: 1.3rem;
+        font-size:18px;
     }
 
     .botao i{
-        font-size: 2rem;
+        font-size:24px;
     }
+
 }

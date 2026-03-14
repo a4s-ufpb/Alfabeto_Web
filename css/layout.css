@@ -1,88 +1,131 @@
-* {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-}
-
-header{
-    display: flex;
-    align-items: center;
-    padding: 0.8rem;
-    position: relative;
-    background-color: rgba(179, 176, 176, 0.5);
-    box-shadow: 3px 3px 3px rgb(67, 66, 66);
-    margin-bottom: 2rem;
-    max-width: 100vw;
-}
-
-header h2{
-    font-size: 2rem;
-    flex-grow: 1;
-    text-align: center;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 body{
-    background-image: linear-gradient(rgb(9, 156, 75), rgb(8, 165, 134));
-    min-height: 100vh;
+    min-height:100vh;
+
+    height: 100%;
+
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: white;
+
+    background: linear-gradient(
+        135deg,
+        #005c28,
+        #0c9c46,
+        #1aae35
+    );
+
+    display:flex;
+    flex-direction:column;
+    
 }
 
-@font-face {
-    font-family: 'Maria Lucia';
-    src: url('../fonte/Maria_lucia.ttf') format('truetype');
-    font-weight: normal;
+
+header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:12px 18px;
+
+    background:rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+
+    box-shadow:0 4px 12px rgba(0,0,0,0.2);
+
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+header h2{
+    font-size:2rem;
+    flex-grow:1;
+    text-align:center;
+    letter-spacing:2px;
 }
 
-.fonte-cursiva {
-    font-family: 'Maria Lucia', cursive;
-}
+.voltar{
+    width:45px;
+    height:45px;
 
-.voltar {
-    width: 45px;
-    height: 45px;
-    color: rgb(12, 192, 93);
-    background-color: rgb(255, 255, 255);
-    border-radius: 40px;
-    box-shadow: 2px 2px 2px rgb(67, 66, 66);
-    cursor: pointer;
-    font-size: 32px;
-    border: none;
-}
+    color:rgb(12,192,93);
+    background:rgb(243, 243, 243);
 
-.voltar:active{
-    box-shadow: 0 5px rgb(95, 95, 94);
-    transform: translateY(4px);
+    border:none;
+    border-radius:50%;
+
+    font-size:26px;
+
+    cursor:pointer;
+
+    box-shadow:0 4px 8px rgba(0,0,0,0.25);
+
+    transition:all 0.2s ease;
 }
 
 .voltar:hover{
-    background-color: rgb(10, 149, 72);
-    transform: scale(1.02);
-    color: rgb(255, 255, 255);
+    background:rgb(10,149,72);
+    color:white;
+    transform:scale(1.05);
+}
+
+.voltar:active{
+    transform:translateY(2px);
 }
 
 .a4s{
-    width: 45px;
-    height: 45px;
-    background-color: rgba(207, 207, 207, 0.5);
-    border-radius: 40px;
-    box-shadow: 2px 2px 2px rgb(67, 66, 66);
-    cursor: pointer;
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.3);
+
+    box-shadow:0 4px 8px rgba(0,0,0,0.25);
+
+    cursor:pointer;
+
+    transition:all 0.2s ease;
 }
 
-.a4s:active {
-    box-shadow: 0 5px rgb(95, 95, 94);
-    transform: translateY(4px);
+.a4s:hover{
+    background:white;
+    transform:scale(1.05);
 }
 
-.a4s:hover {
-    background-color: rgb(255, 255, 255);
-    transform: scale(1.02);
-    color: rgb(9, 156, 75);
+.titulo-texto {
+    color: white;
 }
 
-@media(max-width: 600px){
-    header h2{
-        font-size: 1.5rem;
+@font-face{
+    font-family:'Maria Lucia';
+    src:url('../fonte/Maria_lucia.ttf') format('truetype');
+}
+
+.fonte-cursiva{
+    font-family:'Maria Lucia', cursive;
+}
+
+/* RESPONSIVIDADE */
+
+@media(max-width:600px){
+
+    header{
+        padding:10px;
     }
+
+    header h2{
+        font-size:1.4rem;
+    }
+
+    .voltar,
+    .a4s{
+        width:38px;
+        height:38px;
+        font-size:20px;
+    }
+
 }

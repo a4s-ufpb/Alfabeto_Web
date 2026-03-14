@@ -1,5 +1,5 @@
 const TECLADO_ESCOLHIDO = localStorage.getItem('tecladoEscolhido');
-const QUANTIDADE_DESAFIOS = 5;
+let QUANTIDADE_DESAFIOS = 0;
 let palavraSecreta;
 let palavraAtual;
 let quantidadeDesafiosJogados = 0;
@@ -7,6 +7,8 @@ let palavrasSorteadas = [];
 let contadorDeErros = 0;
 let quantidadeDeTentativas = 0;
 const CONTEXTO_SELECIONADO = localStorage.getItem('contextoSelecionado');
+let CHALLENGES = [];
+
 
 if (!CONTEXTO_SELECIONADO) {
     alert("Nenhum contexto foi selecionado");
@@ -33,43 +35,71 @@ function escolhaDoTeclado(){
     }
 }
 
-function iniciarDesafio() {
+async function carregarChallenges() {
+
+    const CONTEXTO_ID = localStorage.getItem("contextoSelecionado");
+
+    // http://https://educapi.a4s.dev.br/v1/api/contexts/
+    const resposta = await fetch(
+        "http://localhost:8080/v1/api/contexts/" + CONTEXTO_ID
+    );
+
+    const dados = await resposta.json();
+
+    CHALLENGES = dados.challenges || [];
+    QUANTIDADE_DESAFIOS = CHALLENGES.length;
+
+    criarCirculos();
+
+    document.getElementById('tema').innerHTML = dados.name.toUpperCase();
+
+    console.log("Challenges carregados:", CHALLENGES);
+}
+
+async function iniciarDesafio() {
+
+    window.focus();
     escolhaDoTeclado();
-    fetch('repositorio-palavras/palavras.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Erro HTTP: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            const CONTEXTOS = data.contextos;
-            const CONTEXTO_ATUAL = CONTEXTOS.find(contexto => contexto.nome.toLowerCase() === CONTEXTO_SELECIONADO.toLowerCase());
-            let palavraSorteada;
+    atualizarRodadas();
 
-            document.getElementById('tema').innerHTML = CONTEXTO_ATUAL.nome.toUpperCase();
+    if (CHALLENGES.length === 0) {
+        await carregarChallenges();
+    }
 
-            do {
-                palavraSorteada = CONTEXTO_ATUAL.palavras[Math.floor(Math.random() * CONTEXTO_ATUAL.palavras.length)];
-                palavraSecreta = palavraSorteada.nome;
-            } while (palavrasSorteadas.includes(palavraSecreta));
+    if (CHALLENGES.length === 0) {
+        alert("Este tema ainda não possui desafios")
+        window.location.href = "contextos.html";
+        return
+    }
 
-            if (!palavrasSorteadas.includes(palavraSecreta)) {
-                palavrasSorteadas.push(palavraSecreta);
-            }
+    let palavraSorteada;
 
-            palavraAtual = Array(palavraSecreta.length).fill("_"); 
+    do {
 
-            console.log("Palavra secreta sorteada:", palavraSecreta);
-            document.getElementById('imagem-jogo').src = palavraSorteada.imagem;
-            document.getElementById('imagem-jogo').onerror = function () {
-                this.src = "/img/error.png";
-            }
-            
-            exibirPalavra(); 
+        palavraSorteada = CHALLENGES[Math.floor(Math.random() * CHALLENGES.length)];
 
-        })
-        .catch(error => console.error('Erro ao carregar o JSON:', error));
+        palavraSecreta = palavraSorteada.word;
+
+    } while (palavrasSorteadas.includes(palavraSecreta));
+
+    if (!palavrasSorteadas.includes(palavraSecreta)) {
+        palavrasSorteadas.push(palavraSecreta);
+    }
+
+    palavraAtual = Array(palavraSecreta.length).fill("_");
+
+    console.log("Palavra secreta sorteada:", palavraSecreta);
+
+    const img = document.getElementById('imagem-jogo');
+
+    if (palavraSorteada.imageUrl && palavraSorteada.imageUrl !== "null") {
+        img.src = palavraSorteada.imageUrl
+    } else { 
+        img.src = "img/error.png";
+    }
+
+
+    exibirPalavra();
 }
 
 function exibirPalavra() {
@@ -124,18 +154,19 @@ function letraClicada(letra) {
     const BOTOES = document.querySelectorAll(`button[onclick="letraClicada('${letra}')"]`);
     BOTOES.forEach(botao => {
         if (acertou) {
-            botao.style.backgroundColor = 'green';  // Define a cor verde para acertos
+            botao.style.backgroundColor = 'green';
             botao.style.color = 'white';
         } else {
-            botao.style.backgroundColor = 'red';    // Define a cor vermelha para erros
+            botao.style.backgroundColor = 'red';
             botao.style.color = 'white';
         }
-        botao.disabled = true;  // Desabilita o botão
+        botao.disabled = true;
     });
 
     if (!palavraAtual.includes("_")) {
         proximaRodada();
     }
+
 }
 
 function desabilitarBotoes() {
@@ -147,8 +178,12 @@ function desabilitarBotoes() {
 function proximaRodada() {
     desabilitarBotoes();
     quantidadeDesafiosJogados++;
+    
+    atualizarRodadas();
 
     mostrarFeedback("Parabéns!");
+
+    console.log("Rodada atual:", quantidadeDesafiosJogados);
 
     if (quantidadeDesafiosJogados < QUANTIDADE_DESAFIOS) {
         setTimeout(() => {
@@ -180,12 +215,11 @@ function finalizarPartida() {
     document.getElementById('pontuacao-jogador').innerHTML = "Sua pontuação: " + PONTUACAO;
 
     const NOME_FORM = document.querySelector('.recuperar-nome');
-    NOME_FORM.style.display = 'block';  // Mostra a caixa de nome
+    NOME_FORM.style.display = 'block';
 
-    // Adiciona um listener para o envio do nome
     const FORM = document.querySelector('.recuperar-nome form');
     FORM.addEventListener('submit', function(event) {
-        event.preventDefault(); // Impede o comportamento padrão de recarregar a página
+        event.preventDefault();
 
         const NOME_JOGADOR = document.getElementById('nomeJogador').value;
         localStorage.setItem('nome-jogador', NOME_JOGADOR);
@@ -196,7 +230,6 @@ function finalizarPartida() {
             ranking.push({ nome: NOME_JOGADOR, pontuacao: PONTUACAO });
             ranking.sort((a, b) => b.pontuacao - a.pontuacao);        
 
-            //mantém apenas o top 5
             ranking = ranking.slice(0, 5);
 
             localStorage.setItem("ranking", JSON.stringify(ranking));
@@ -221,7 +254,6 @@ function mostrarFeedback(mensagem) {
 
     FEEDBACK_CONTAINER.style.display = 'block';
     
-    // Remove a mensagem após o tempo determinado
     setTimeout(() => {
         FEEDBACK_CONTAINER.style.display = 'none';
     }, 3000);
@@ -279,3 +311,58 @@ function redirecionar() {
         window.location.href = urlDestino;
     }
 }
+
+function atualizarRodadas() {
+
+    const circulos = document.querySelectorAll(".circulo");
+
+    console.log("circulos encontrados:", circulos.length)
+
+    circulos.forEach((circulo, index) => {
+        circulo.classList.remove("atual", "concluido")
+
+        if (index < quantidadeDesafiosJogados) {
+            circulo.classList.add("concluido");
+        } else if (index === quantidadeDesafiosJogados) {
+            circulo.classList.add("atual");
+        }
+    });
+
+    const texto = document.getElementById("rodada-texto");
+
+    if (texto) {
+        texto.innerHTML = "Rodada " + Math.min(quantidadeDesafiosJogados + 1, QUANTIDADE_DESAFIOS) + " de " + QUANTIDADE_DESAFIOS;
+    }
+}
+
+function criarCirculos(){
+
+    const container = document.querySelector(".circulos");
+
+    container.innerHTML = "";
+
+    for(let i = 0; i < QUANTIDADE_DESAFIOS; i++){
+
+        const circulo = document.createElement("div");
+
+        circulo.classList.add("circulo");
+
+        container.appendChild(circulo);
+    }
+
+}
+
+
+// teclado real
+
+    document.addEventListener("keydown", function(event) {
+        const tecla = event.key.toUpperCase();
+
+        if (!tecla.match(/^[A-Z]$/)) return;
+
+        const botao = document.querySelector(`button[onclick = "letraClicada('${tecla}')"]`);
+
+        if (botao && !botao.disabled) {
+            letraClicada(tecla);
+        }
+    });

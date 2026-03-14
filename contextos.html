@@ -14,47 +14,18 @@
     
     <header>
         <button class="voltar" title="VOLTAR" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-left"></i></button>
-        <h2>TEMAS</h2>
+        <h2 class="titulo-texto">TEMAS</h2>
     </header>
 
     <main>
-        <div class="flex-container">
-            <a href="niveis.html" class="box" onclick="escolherContexto('cores')">
-                <img src="img/cores/cores.png" alt="Cores">
-                <h3>CORES</h3>
-            </a>
-            <a href="niveis.html" class="box" onclick="escolherContexto('objetos')">
-                <img src="img/objetos/objetos.png" alt="Objetos">
-                <h3>OBJETOS</h3>
-            </a>
-            <a href="niveis.html" class="box" onclick="escolherContexto('frutas')">
-                <img src="img/frutas/frutas.png" alt="Frutas">
-                <h3>FRUTAS</h3>
-            </a>
-            <a href="niveis.html" class="box" onclick="escolherContexto('animais')">
-                <img src="img/animais/animais.png" alt="Animais">
-                <h3>ANIMAIS</h3>
-            </a>
-            <a href="niveis.html" class="box" onclick="escolherContexto('brinquedos')">
-                <img src="img/brinquedos/brinquedos.png" alt="Brinquedos">
-                <h3>BRINQUEDOS</h3>
-            </a>
-            <a href="niveis.html" class="box" onclick="escolherContexto('corpo humano')">
-                <img src="img/partesCorpo/partes.png" alt="Partes do corpo">
-                <h3>CORPO HUMANO</h3>
-            </a>
-            <a href="niveis.html" class="box" onclick="escolherContexto('paises')">
-                <img src="img/paises/paises.png" alt="Países">
-                <h3>PAÍSES</h3>
-            </a>
+
+        <button class="importar-temas" onclick="window.location.href='importar-contextos.html'">Importar temas</button>
+        
+        <div class="flex-container" id="lista-contextos"></div>
+
     </main>
 
-    <Script>
-         function escolherContexto(contexto){
-            localStorage.setItem('contextoSelecionado', contexto);
-         }
-    </Script>
-
+    <script src="js/contextos.js"></script>
     <script src="js/configuracao.js"></script>
 </body>
 </html>
