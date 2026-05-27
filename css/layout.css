@@ -1,3 +1,28 @@
+:root{
+    --green-950:#04331f;
+    --green-900:#064f31;
+    --green-800:#08713a;
+    --green-700:#0a7b39;
+    --green-600:#0c8f54;
+    --green-500:#12a238;
+    --teal-700:#0b7d72;
+    --teal-600:#0a9674;
+    --teal-500:#07977d;
+    --danger-700:#b91c1c;
+    --danger-600:#dc2626;
+    --danger-500:#ef4444;
+    --white:#ffffff;
+    --surface:rgba(20, 94, 63, 0.78);
+    --surface-strong:rgba(20, 94, 63, 0.94);
+    --surface-light:rgba(246, 253, 248, 0.92);
+    --border-light:rgba(255, 255, 255, 0.22);
+    --shadow-soft:0 18px 42px rgba(3, 43, 25, 0.25);
+    --shadow-strong:0 24px 52px rgba(3, 43, 25, 0.32);
+    --button-lift:0 8px 0 rgba(5, 90, 75, 0.68), 0 16px 28px rgba(3, 43, 25, 0.24);
+    --button-lift-danger:0 8px 0 rgba(111, 18, 18, 0.7), 0 16px 28px rgba(3, 43, 25, 0.2);
+    --radius:8px;
+}
+
 *{
     margin:0;
     padding:0;
@@ -6,94 +31,154 @@
 
 body{
     min-height:100vh;
-
-    height: 100%;
-
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-
-    background: linear-gradient(
-        135deg,
-        #005c28,
-        #0c9c46,
-        #1aae35
-    );
-
+    color:white;
+    background:
+        radial-gradient(circle at 18% 10%, rgba(255,255,255,0.18), transparent 30%),
+        radial-gradient(circle at 88% 22%, rgba(255,255,255,0.12), transparent 28%),
+        linear-gradient(135deg, var(--green-900) 0%, var(--green-700) 45%, var(--green-500) 100%);
+    background-attachment: fixed;
     display:flex;
     flex-direction:column;
-    
 }
 
+main{
+    flex:1;
+}
 
 header{
     display:flex;
     align-items:center;
     justify-content:space-between;
-
-    padding:12px 18px;
-
-    background:rgba(255,255,255,0.15);
-    backdrop-filter: blur(8px);
-
-    box-shadow:0 4px 12px rgba(0,0,0,0.2);
-
+    min-height:84px;
+    padding:14px 22px;
+    background:rgba(26,104,67,0.68);
+    border-bottom:1px solid rgba(255,255,255,0.14);
+    box-shadow:0 8px 22px rgba(3,43,25,0.24);
+    backdrop-filter:blur(10px);
     position:sticky;
     top:0;
     z-index:10;
 }
+
 header h2{
-    font-size:2rem;
+    color:white;
+    font-size:2.25rem;
+    font-weight:800;
     flex-grow:1;
     text-align:center;
-    letter-spacing:2px;
+    letter-spacing:0;
+    text-shadow:0 3px 12px rgba(0,0,0,0.22);
 }
 
 .voltar{
-    width:45px;
-    height:45px;
-
-    color:rgb(12,192,93);
-    background:rgb(243, 243, 243);
-
+    width:48px;
+    height:48px;
+    color:var(--green-600);
+    background:#f7fbf8;
     border:none;
     border-radius:50%;
-
-    font-size:26px;
-
+    font-size:25px;
     cursor:pointer;
-
-    box-shadow:0 4px 8px rgba(0,0,0,0.25);
-
-    transition:all 0.2s ease;
+    box-shadow:0 7px 0 #cdded3, 0 14px 24px rgba(4,47,28,0.22);
+    transition:background 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .voltar:hover{
-    background:rgb(10,149,72);
+    background:var(--green-600);
     color:white;
-    transform:scale(1.05);
+    transform:translateY(-1px);
+    box-shadow:0 8px 0 rgba(5, 90, 75, 0.68), 0 18px 28px rgba(4,47,28,0.28);
 }
 
 .voltar:active{
-    transform:translateY(2px);
+    transform:translateY(4px);
+    box-shadow:0 3px 0 rgba(5, 90, 75, 0.68), 0 9px 18px rgba(4,47,28,0.22);
 }
 
 .a4s{
-    width:45px;
-    height:45px;
-
+    width:48px;
+    height:48px;
     border-radius:50%;
-
     background:rgba(255,255,255,0.3);
-
-    box-shadow:0 4px 8px rgba(0,0,0,0.25);
-
+    box-shadow:0 7px 0 rgba(255,255,255,0.22), 0 14px 24px rgba(4,47,28,0.22);
     cursor:pointer;
-
-    transition:all 0.2s ease;
+    transition:background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .a4s:hover{
     background:white;
-    transform:scale(1.05);
+    transform:translateY(-1px);
+    box-shadow:0 10px 20px rgba(4,47,28,0.28);
+}
+
+.btn-3d,
+.btn-primary,
+.btn-danger,
+.menu-button {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border:none;
+    border-radius:var(--radius);
+    color:white;
+    font-weight:800;
+    cursor:pointer;
+    text-decoration:none;
+    transition:transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease, color 0.16s ease, filter 0.16s ease;
+}
+
+.btn-3d,
+.btn-primary {
+    background:linear-gradient(135deg, var(--teal-700), var(--teal-600));
+    box-shadow:var(--button-lift);
+}
+
+.btn-danger {
+    background:linear-gradient(135deg, var(--danger-500), var(--danger-600));
+    box-shadow:var(--button-lift-danger);
+}
+
+.btn-circle {
+    width:48px;
+    height:48px;
+    padding:0;
+    border-radius:50%;
+}
+
+.btn-3d:hover,
+.btn-primary:hover,
+.btn-danger:hover,
+.menu-button:hover {
+    transform:translateY(-2px);
+    filter:brightness(1.04);
+}
+
+.btn-3d:active,
+.btn-primary:active,
+.btn-danger:active,
+.menu-button:active {
+    transform:translateY(4px);
+    box-shadow:0 3px 0 rgba(5, 90, 75, 0.68), 0 9px 18px rgba(3, 43, 25, 0.18);
+}
+
+.btn-danger:active {
+    box-shadow:0 3px 0 rgba(111, 18, 18, 0.7), 0 9px 18px rgba(3, 43, 25, 0.18);
+}
+
+.card {
+    border:1px solid var(--border-light);
+    border-radius:var(--radius);
+    background:var(--surface);
+    box-shadow:var(--shadow-soft);
+    backdrop-filter:blur(8px);
+}
+
+.modal-card {
+    border:1px solid rgba(255,255,255,0.28);
+    border-radius:var(--radius);
+    background:var(--surface-strong);
+    box-shadow:0 22px 54px rgba(3, 43, 25, 0.36);
 }
 
 .titulo-texto {
@@ -114,11 +199,12 @@ header h2{
 @media(max-width:600px){
 
     header{
-        padding:10px;
+        min-height:70px;
+        padding:10px 14px;
     }
 
     header h2{
-        font-size:1.4rem;
+        font-size:1.45rem;
     }
 
     .voltar,
@@ -135,7 +221,7 @@ header h2{
     top: 80px;
     right: 20px;
     padding: 12px 18px;
-    border-radius: 8px;
+    border-radius: var(--radius);
     color: white;
     font-size: 14px;
     opacity: 0;
@@ -145,8 +231,8 @@ header h2{
 }
 
 
-.toast.sucesso { background: #008404; }
-.toast.erro { background: #0b4300; }
+.toast.sucesso { background: var(--green-700); }
+.toast.erro { background: var(--danger-600); }
 
 
 .toast.show {
