@@ -7,13 +7,19 @@
     <link rel="stylesheet" href="css/ranking.css">
     <link rel="icon" type="image/x-icon" href="img/logotipofinal.png">
     <script src="https://kit.fontawesome.com/c141c3c5e6.js" crossorigin="anonymous"></script>
+
+
     <title>Ranking</title>
 </head>
 <body>
     <header>
-        <button title="VOLTAR" class="voltar" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-left"></i></button>
+        <button title="VOLTAR" class="voltar" onclick="window.location.href='index.html'">
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
         <h2 class="titulo-texto">RANKING</h2>
     </header>
+
+
     <main>
         <div class="container">
             <table class="tabela">
@@ -22,34 +28,19 @@
                     <th>NOME</th>
                     <th>PONTUAÇÃO</th>
                 </tr>
-                <tr>
-                    <td>1°</td>
-                    <td>Teste</td>
-                    <td>0.0</td>
-                </tr>
-                <tr>
-                    <td>2°</td>
-                    <td>Teste</td>
-                    <td>0.0</td>
-                </tr>
-                <tr>
-                    <td>3°</td>
-                    <td>Teste</td>
-                    <td>0.0</td>
-                </tr>
-                <tr>
-                    <td>4°</td>
-                    <td>Teste</td>
-                    <td>0.0</td>
-                </tr>
-                <tr>
-                    <td>5°</td>
-                    <td>Teste</td>
-                    <td>0.0</td>
-                </tr>
+                <tr><td>1°</td><td>Teste</td><td>0.0</td></tr>
+                <tr><td>2°</td><td>Teste</td><td>0.0</td></tr>
+                <tr><td>3°</td><td>Teste</td><td>0.0</td></tr>
+                <tr><td>4°</td><td>Teste</td><td>0.0</td></tr>
+                <tr><td>5°</td><td>Teste</td><td>0.0</td></tr>
             </table>
         </div>
-        <button class="zerar-ranking" onclick="mostrarConfirmacaoZerarRanking()">Limpar Ranking</button>
+
+
+        <button class="zerar-ranking" onclick="mostrarConfirmacaoZerarRanking()">
+            Limpar Ranking
+        </button>
+
 
         <div class="confirmacao-zerar-ranking">
             <p>Tem certeza que deseja limpar o ranking?</p>
@@ -57,11 +48,14 @@
             <button class="cancelar" onclick="esconderConfirmacaoZerarRanking()">CANCELAR</button>
         </div>
 
-        <div class="mensagem-sucesso">
-            <p id="sucesso"></p>
-        </div>
+
     </main>
 
+    <div id="toast">
+        <span id="toast-text"></span>
+    </div>
+
+    <script src="js/toast.js"></script>
     <script src="js/ranking.js"></script>
 </body>
 </html>

@@ -2,7 +2,7 @@ let TODOS_CONTEXTOS = [];
 
 document.addEventListener("DOMContentLoaded", iniciar);
 
-async function iniciar(){
+async function iniciar() {
 
     await carregarContexts();
 
@@ -10,9 +10,9 @@ async function iniciar(){
 
 }
 
-async function carregarContexts(){
+async function carregarContexts() {
 
-    // http://https://educapi.a4s.dev.br/v1/api/contexts 
+    //  https://educapi.a4s.dev.br/v1/api/contexts
     const resposta = await fetch("http://localhost:8080/v1/api/contexts");
 
     const dados = await resposta.json();
@@ -23,21 +23,39 @@ async function carregarContexts(){
 
 function mostrarContextos(){
 
+
     const container = document.querySelector(".flex-container");
+
 
     const ids = JSON.parse(localStorage.getItem("contextosImportados")) || [];
 
+
     container.innerHTML = "";
 
-    ids.forEach(id => {
 
-        const contexto = TODOS_CONTEXTOS.find(c => c.id === id);
+    const contextosFiltrados = ids
+        .map(id => TODOS_CONTEXTOS.find(c => c.id === id))
+        .filter(contexto => contexto); // remove undefined
 
-        if(!contexto) return;
+
+    if(contextosFiltrados.length === 0){
+        container.innerHTML = `
+            <p class="mensagem-vazia">
+                Nenhum tema importado
+            </p>
+        `;
+        return;
+    }
+
+
+    contextosFiltrados.forEach(contexto => {
+
 
         const card = document.createElement("div");
 
+
         card.classList.add("box");
+
 
         card.innerHTML = `
             <button class="remover-contexto" onclick="removerContexto(event, ${contexto.id})">✖</button>
@@ -45,21 +63,21 @@ function mostrarContextos(){
             <h3>${contexto.name.toUpperCase()}</h3>
         `;
 
+
         card.onclick = () => {
-
             localStorage.setItem("contextoSelecionado", contexto.id);
-
             window.location.href = "niveis.html";
-
         };
 
+
         container.appendChild(card);
+
 
     });
 
 }
 
-function removerContexto(event, id){
+function removerContexto(event, id) {
 
     event.stopPropagation();
 

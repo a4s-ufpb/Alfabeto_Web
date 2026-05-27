@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,17 +8,25 @@
     <link rel="stylesheet" href="css/jogo.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/c141c3c5e6.js" crossorigin="anonymous"></script>
+    <script src="js/toast.js"></script>
     <link rel="icon" type="image/x-icon" href="img/logotipofinal.png">
     <title>Jogo</title>
 </head>
+
 <body>
     <header>
         <div class="botoes-esquerda">
-            <button class="voltar hamburguer-botoes" title="VOLTAR"  onclick="mostrarConfirmacaoSairTela('Tem certeza que deseja voltar para a tela de temas?', 'contextos.html')"><i class="fa-solid fa-arrow-left"></i></button>
-            <a class="hamburguer-botoes alfabeto-link" title="VOLTAR PARA O INÍCIO" onclick="event.preventDefault(); mostrarConfirmacaoSairTela('Tem certeza que deseja voltar para a tela inicial?', 'index.html')"><img src="img/beto_logo.png" alt="Logo AlfaBeto" class="alfabeto"></a>
+            <button class="voltar hamburguer-botoes" title="VOLTAR"
+                onclick="mostrarConfirmacaoSairTela('Tem certeza que deseja voltar para a tela de temas?', 'contextos.html')"><i
+                    class="fa-solid fa-arrow-left"></i></button>
+            <a class="hamburguer-botoes alfabeto-link" title="VOLTAR PARA O INÍCIO"
+                onclick="event.preventDefault(); mostrarConfirmacaoSairTela('Tem certeza que deseja voltar para a tela inicial?', 'index.html')"><img
+                    src="img/beto_logo.png" alt="Logo AlfaBeto" class="alfabeto"></a>
         </div>
         <h2 id="tema"></h2>
-        <a class="hamburguer-botoes a4s-link" title="Apps4Society" target="_blank" onclick="event.preventDefault(); mostrarConfirmacaoSairTela('Tem certeza que deseja ir para o site do A4S?', 'https://apps4society.dcx.ufpb.br/alfabeto/')"><img src="img/logotipofinal.png" class="a4s" alt="apps4society"></a>
+        <a class="hamburguer-botoes a4s-link" title="Apps4Society" target="_blank"
+            onclick="event.preventDefault(); mostrarConfirmacaoSairTela('Tem certeza que deseja ir para o site do A4S?', 'https://apps4society.dcx.ufpb.br/alfabeto/')"><img
+                src="img/logotipofinal.png" class="a4s" alt="apps4society"></a>
         <div class="hamburguer">
             <i class="fa-solid fa-bars" onclick="exibirOcultarBotoes()"></i>
         </div>
@@ -26,116 +35,122 @@
         <div class="flex-container">
             <div class="feedback">
                 <p id="feedback"></p>
-            </div>  
-        <div class="container">
+            </div>
+            <div class="container">
 
-             <div class="progresso">
-                <div class="circulos">
+                <div class="progresso">
+                    <div class="circulos">
+                    </div>
+                    <span id="rodada-texto">Rodada 1 de 5</span>
                 </div>
-                <span id="rodada-texto">Rodada 1 de 5</span>
-            </div>
 
-            <img src="" id="imagem-jogo" alt="Imagem do jogo">
-            <p id="palavra" class="fonteDaLetra"></p>
+                <img src="" id="imagem-jogo" alt="Imagem do jogo">
+                <p id="palavra" class="fonteDaLetra"></p>
 
-        </div>
-        <div class="teclado">
-            <div id="alfabeto">
-                <table>
-                    <tr>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('A')">A</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('B')">B</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('C')">C</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('D')">D</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('E')">E</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('F')">F</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('G')">G</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('H')">H</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('I')">I</button></td>
-                    </tr>
-                    <tr>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('J')">J</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('K')">K</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('L')">L</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('M')">M</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('N')">N</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('O')">O</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('P')">P</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('Q')">Q</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('R')">R</button></td>
-                    </tr>
-                    <tr>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('S')">S</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('T')">T</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('U')">U</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('V')">V</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('W')">W</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('X')">X</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('Y')">Y</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('Z')">Z</button></td>
-                    </tr>
-                </table>
             </div>
-            <div id="vogais">
-                <table>
-                    <tr>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('A')">A</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('E')">E</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('I')">I</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('O')">O</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('U')">U</button></td>
-                    </tr>
-                </table>
-            </div>
-            <div id="consoantes">
-                <table>
-                    <tr>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('B')">B</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('C')">C</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('D')">D</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('F')">F</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('G')">G</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('H')">H</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('J')">J</button></td>
-                    </tr>
-                    <tr>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('K')">K</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('L')">L</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('M')">M</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('N')">N</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('P')">P</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('Q')">Q</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('R')">R</button></td>
-                    </tr>
-                    <tr>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('S')">S</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('T')">T</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('V')">V</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('W')">W</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('X')">X</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('Y')">Y</button></td>
-                        <td><button class="fonteDaLetra" onclick="letraClicada('Z')">Z</button></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="recuperar-nome">
-            <p id="pontuacao-jogador"></p><br>
-            <form>
-                <label for="nomeJogador">Digite seu nome:</label><br>
-                <input type="text" id="nomeJogador" name="nome" required placeholder="Ex.: Gabriela"><br>
-                <div class="confirmar">
-                    <button class="confirmar-nome" type="submit">CONFIRMAR</button>
+            <div class="teclado">
+                <div id="alfabeto">
+                    <table>
+                        <tr>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('A')">A</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('B')">B</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('C')">C</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('D')">D</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('E')">E</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('F')">F</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('G')">G</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('H')">H</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('I')">I</button></td>
+                        </tr>
+                        <tr>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('J')">J</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('K')">K</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('L')">L</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('M')">M</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('N')">N</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('O')">O</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('P')">P</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('Q')">Q</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('R')">R</button></td>
+                        </tr>
+                        <tr>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('S')">S</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('T')">T</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('U')">U</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('V')">V</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('W')">W</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('X')">X</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('Y')">Y</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('Z')">Z</button></td>
+                        </tr>
+                    </table>
                 </div>
-            </form>
-        </div>
-        <div class="confirmacao-sair-tela">
-            <p id="texto-confirmacao"></p>
-            <button class="confirmar-saida" onclick="redirecionar()">CONFIRMAR</button>
-            <button class="cancelar" onclick="esconderConfirmacaoSairTela()">CANCELAR</button>
-        </div>
-    </main> 
+                <div id="vogais">
+                    <table>
+                        <tr>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('A')">A</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('E')">E</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('I')">I</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('O')">O</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('U')">U</button></td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="consoantes">
+                    <table>
+                        <tr>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('B')">B</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('C')">C</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('D')">D</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('F')">F</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('G')">G</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('H')">H</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('J')">J</button></td>
+                        </tr>
+                        <tr>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('K')">K</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('L')">L</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('M')">M</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('N')">N</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('P')">P</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('Q')">Q</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('R')">R</button></td>
+                        </tr>
+                        <tr>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('S')">S</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('T')">T</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('V')">V</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('W')">W</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('X')">X</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('Y')">Y</button></td>
+                            <td><button class="fonteDaLetra" onclick="letraClicada('Z')">Z</button></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="recuperar-nome">
+                <p id="pontuacao-jogador"></p><br>
+                <form>
+                    <label for="nomeJogador">Digite seu nome:</label><br>
+                    <input type="text" id="nomeJogador" name="nome" required placeholder="Ex.: Gabriela"><br>
+                    <div class="confirmar">
+                        <button class="confirmar-nome" type="submit">CONFIRMAR</button>
+                    </div>
+                </form>
+            </div>
+            <div class="confirmacao-sair-tela">
+                <p id="texto-confirmacao"></p>
+                <button class="confirmar-saida" onclick="redirecionar()">CONFIRMAR</button>
+                <button class="cancelar" onclick="esconderConfirmacaoSairTela()">CANCELAR</button>
+            </div>
+
+            <div id="toast" class="toast">
+                <p id="toast-text"></p>
+            </div>
+
+    </main>
     <script src="js/configuracao.js"></script>
     <script src="js/jogo.js"></script>
 </body>
+
 </html>

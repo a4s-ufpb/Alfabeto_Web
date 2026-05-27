@@ -6,7 +6,7 @@
     gap: 30px;
 }
 
-.voltar{
+.voltar {
     position: absolute;
     margin-right: auto;
 }
@@ -18,8 +18,10 @@
 .box {
     display: flex;
     align-items: center;
-    flex: 1 1 calc(45% - 30px); /* Cada card ocupa 50% da largura disponível */
-    max-width: calc(45% - 30px); /* Limita a largura máxima dos cards */
+    flex: 1 1 calc(45% - 30px);
+    /* Cada card ocupa 50% da largura disponível */
+    max-width: calc(45% - 30px);
+    /* Limita a largura máxima dos cards */
     overflow: hidden;
     text-align: left;
     border-radius: 10px;
@@ -32,7 +34,7 @@
 }
 
 .box:hover {
-    transform: scale(1.05); /* Efeito de zoom ao passar o mouse sobre o card */
+    transform: scale(1.05);
 }
 
 .box img {
@@ -49,7 +51,8 @@
 
 @media (max-width: 1024px) {
     .box {
-        flex: 1 1 calc(70% - 30px); /* Cada card ocupa 70% da largura disponível em telas menores */
+        flex: 1 1 calc(70% - 30px);
+        /* Cada card ocupa 70% da largura disponível em telas menores */
         max-width: calc(70% - 30px);
     }
 
@@ -66,7 +69,8 @@
 
 @media (max-width: 800px) {
     .box {
-        flex: 1 1 calc(100% - 30px); /* Cada card ocupa 100% da largura disponível em telas pequenas */
+        flex: 1 1 calc(100% - 30px);
+        /* Cada card ocupa 100% da largura disponível em telas pequenas */
         max-width: calc(100% - 30px);
     }
 
@@ -92,7 +96,7 @@
         margin-right: 40px;
     }
 
-    .voltar{
+    .voltar {
         width: 35px;
         height: 35px;
         font-size: 25px;
@@ -103,42 +107,40 @@
     }
 }
 
-.importar-temas{
-    display:block;
-    margin:30px auto 10px auto;
+.importar-temas {
+    display: block;
+    margin: 30px auto 10px auto;
 
-    padding:12px 22px;
+    padding: 12px 22px;
 
-    font-size:1rem;
-    font-weight:600;
+    font-size: 1rem;
+    font-weight: 600;
 
-    background:linear-gradient(
-        135deg,
-        #0c9c46,
-        #1aae35
-    );
+    background: linear-gradient(135deg,
+            #10a37f,
+            #0d8c6c);
 
-    color:white;
+    color: white;
 
-    border:none;
-    border-radius:12px;
+    border: none;
+    border-radius: 12px;
 
-    cursor:pointer;
+    cursor: pointer;
 
-    box-shadow:0 4px 10px rgba(0,0,0,0.25);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 
-    transition:all 0.2s ease;
+    transition: all 0.2s ease;
 }
 
-.importar-temas:hover{
-    transform:scale(1.05);
+.importar-temas:hover {
+    transform: scale(1.05);
 }
 
-.importar-temas:active{
-    transform:translateY(2px);
+.importar-temas:active {
+    transform: translateY(2px);
 }
 
-#buscarContexto{
+#buscarContexto {
 
     width: 60%;
     max-width: 500px;
@@ -161,37 +163,44 @@
 
 }
 
-#buscarContexto:focus{
+#buscarContexto:focus {
 
     border-color: #4CAF50;
 
-    box-shadow: 0 0 6px rgba(76,175,80,0.4);
+    box-shadow: 0 0 6px rgba(76, 175, 80, 0.4);
 
 }
 
-.remover-contexto{
+.remover-contexto {
 
-    position:absolute;
+    position: absolute;
 
-    top:8px;
-    right:8px;
+    top: 8px;
+    right: 8px;
 
-    background:rgb(208, 0, 0);
-    color:white;
+    background: rgb(208, 0, 0);
+    color: white;
 
-    border:none;
+    border: none;
 
-    border-radius:50%;
+    border-radius: 50%;
 
-    width:25px;
-    height:25px;
+    width: 25px;
+    height: 25px;
 
-    cursor:pointer;
+    cursor: pointer;
 
-    font-size:14px;
+    font-size: 14px;
 
 }
 
-.box{
-    position:relative;
+.box {
+    position: relative;
+}
+
+.mensagem-vazia {
+    text-align: center;
+    margin-top: 30px;
+    color: #e6e6e6;
+    font-size: 18px;
 }

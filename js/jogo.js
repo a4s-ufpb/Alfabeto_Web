@@ -18,7 +18,7 @@ if (!CONTEXTO_SELECIONADO) {
 }
 
 
-function escolhaDoTeclado(){
+function escolhaDoTeclado() {
     console.log('Função chamada:', 'escolhaDoTeclado');
     if (TECLADO_ESCOLHIDO === 'vogais') {
         document.getElementById('vogais').style.display = 'block';
@@ -39,7 +39,7 @@ async function carregarChallenges() {
 
     const CONTEXTO_ID = localStorage.getItem("contextoSelecionado");
 
-    // http://https://educapi.a4s.dev.br/v1/api/contexts/
+    // 
     const resposta = await fetch(
         "http://localhost:8080/v1/api/contexts/" + CONTEXTO_ID
     );
@@ -60,7 +60,6 @@ async function iniciarDesafio() {
 
     window.focus();
     escolhaDoTeclado();
-    atualizarRodadas();
 
     if (CHALLENGES.length === 0) {
         await carregarChallenges();
@@ -71,6 +70,8 @@ async function iniciarDesafio() {
         window.location.href = "contextos.html";
         return
     }
+
+    atualizarRodadas();
 
     let palavraSorteada;
 
@@ -94,7 +95,7 @@ async function iniciarDesafio() {
 
     if (palavraSorteada.imageUrl && palavraSorteada.imageUrl !== "null") {
         img.src = palavraSorteada.imageUrl
-    } else { 
+    } else {
         img.src = "img/error.png";
     }
 
@@ -117,7 +118,7 @@ function exibirPalavra() {
                 palavraAtual[i] = palavraSecreta[i];
             }
         }
-    } 
+    }
 
     PALAVRA_CONTAINER.textContent = palavraAtual.join(" ").toUpperCase();
 }
@@ -133,7 +134,7 @@ function isConsoante(letra) {
 
 function letraClicada(letra) {
     let acertou = false;
-    
+
     for (let i = 0; i < palavraSecreta.length; i++) {
         const letraNormalizadaPalavra = palavraSecreta[i].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
         const letraNormalizadaClicada = letra.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -141,16 +142,16 @@ function letraClicada(letra) {
             palavraAtual[i] = palavraSecreta[i];
             acertou = true;
         }
-    } 
+    }
 
     quantidadeDeTentativas++;
 
     if (!acertou) {
         contadorDeErros++;
     }
-    
+
     exibirPalavra();
-    
+
     const BOTOES = document.querySelectorAll(`button[onclick="letraClicada('${letra}')"]`);
     BOTOES.forEach(botao => {
         if (acertou) {
@@ -172,13 +173,14 @@ function letraClicada(letra) {
 function desabilitarBotoes() {
     const BOTOES = document.querySelectorAll('button[onclick^="letraClicada"]');
     BOTOES.forEach(botao => {
-        botao.disabled = true;})
+        botao.disabled = true;
+    })
 }
 
 function proximaRodada() {
     desabilitarBotoes();
     quantidadeDesafiosJogados++;
-    
+
     atualizarRodadas();
 
     mostrarFeedback("Parabéns!");
@@ -218,7 +220,7 @@ function finalizarPartida() {
     NOME_FORM.style.display = 'block';
 
     const FORM = document.querySelector('.recuperar-nome form');
-    FORM.addEventListener('submit', function(event) {
+    FORM.addEventListener('submit', function (event) {
         event.preventDefault();
 
         const NOME_JOGADOR = document.getElementById('nomeJogador').value;
@@ -228,14 +230,14 @@ function finalizarPartida() {
             let ranking = JSON.parse(localStorage.getItem("ranking")) || [];
 
             ranking.push({ nome: NOME_JOGADOR, pontuacao: PONTUACAO });
-            ranking.sort((a, b) => b.pontuacao - a.pontuacao);        
+            ranking.sort((a, b) => b.pontuacao - a.pontuacao);
 
             ranking = ranking.slice(0, 5);
 
             localStorage.setItem("ranking", JSON.stringify(ranking));
 
             NOME_FORM.style.display = 'none';
-        
+
             setTimeout(() => {
                 window.location.href = 'pontuacao.html';
             }, 1000);
@@ -247,16 +249,27 @@ function finalizarPartida() {
 
 
 function mostrarFeedback(mensagem) {
-    const FEEDBACK_ELEMENT = document.getElementById('feedback');
-    FEEDBACK_ELEMENT.innerHTML = mensagem;
 
-    const FEEDBACK_CONTAINER = FEEDBACK_ELEMENT.parentElement;
 
-    FEEDBACK_CONTAINER.style.display = 'block';
-    
+    const toast = document.getElementById("toast");
+    const texto = document.getElementById("toast-text");
+
+
+    if (!toast || !texto) {
+        console.warn("Toast não encontrado no HTML");
+        return;
+    }
+
+    texto.innerText = mensagem;
+
+    toast.classList.remove("erro");
+    toast.classList.add("sucesso");
+
+    toast.classList.add("show");
+
     setTimeout(() => {
-        FEEDBACK_CONTAINER.style.display = 'none';
-    }, 3000);
+        toast.classList.remove("show");
+    }, 2000);
 }
 
 
@@ -268,11 +281,11 @@ function exibirPontuacao() {
     localStorage.setItem('pontuacao', pontuacao);
 }
 
-function exibirOcultarBotoes(){
+function exibirOcultarBotoes() {
     const BOTOES = document.querySelectorAll('.hamburguer-botoes');
-    
+
     BOTOES.forEach(botao => {
-        if (botao.style.display == "block"){
+        if (botao.style.display == "block") {
             botao.style.display = "none";
         } else {
             botao.style.display = "block";
@@ -283,27 +296,27 @@ function exibirOcultarBotoes(){
 let urlDestino;
 
 function confirmarSaida(texto) {
-    const divConfirmacao = document.querySelector('.confirmar-acao'); 
+    const divConfirmacao = document.querySelector('.confirmar-acao');
     const paragrafo = document.getElementById('confirmar-saida');
     if (divConfirmacao.style.display === "none") {
         divConfirmacao.style.display = "block";
         paragrafo.innerHTML = texto;
-    } 
+    }
 }
 
 function mostrarConfirmacaoSairTela(texto, url) {
     const CONFIRMAR = document.querySelector('.confirmacao-sair-tela');
     CONFIRMAR.style.display = "block";
-    
+
     const PARAGRAFO = document.getElementById('texto-confirmacao');
     PARAGRAFO.innerHTML = texto;
-    
+
     urlDestino = url;
 }
 
 function esconderConfirmacaoSairTela() {
     const CONFIRMAR = document.querySelector('.confirmacao-sair-tela');
-    CONFIRMAR.style.display = "none"; 
+    CONFIRMAR.style.display = "none";
 }
 
 function redirecionar() {
@@ -335,13 +348,13 @@ function atualizarRodadas() {
     }
 }
 
-function criarCirculos(){
+function criarCirculos() {
 
     const container = document.querySelector(".circulos");
 
     container.innerHTML = "";
 
-    for(let i = 0; i < QUANTIDADE_DESAFIOS; i++){
+    for (let i = 0; i < QUANTIDADE_DESAFIOS; i++) {
 
         const circulo = document.createElement("div");
 
@@ -355,14 +368,14 @@ function criarCirculos(){
 
 // teclado real
 
-    document.addEventListener("keydown", function(event) {
-        const tecla = event.key.toUpperCase();
+document.addEventListener("keydown", function (event) {
+    const tecla = event.key.toUpperCase();
 
-        if (!tecla.match(/^[A-Z]$/)) return;
+    if (!tecla.match(/^[A-Z]$/)) return;
 
-        const botao = document.querySelector(`button[onclick = "letraClicada('${tecla}')"]`);
+    const botao = document.querySelector(`button[onclick = "letraClicada('${tecla}')"]`);
 
-        if (botao && !botao.disabled) {
-            letraClicada(tecla);
-        }
-    });
+    if (botao && !botao.disabled) {
+        letraClicada(tecla);
+    }
+});

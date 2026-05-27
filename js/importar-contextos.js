@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", carregarContextos);
 
 async function carregarContextos() {
 
-    // http://https://educapi.a4s.dev.br/v1/api/contexts 
+    //  https://educapi.a4s.dev.br/v1/api/contexts
 
     const resposta = await fetch("http://localhost:8080/v1/api/contexts");
 
@@ -16,41 +16,60 @@ async function carregarContextos() {
 
 }
 
-function mostrarContextos(lista = CONTEXTOS){
+function mostrarContextos(lista = CONTEXTOS) {
+
 
     const container = document.getElementById("lista-contextos");
 
+
     const importados = JSON.parse(localStorage.getItem("contextosImportados")) || [];
+
 
     container.innerHTML = "";
 
-    lista
-        .filter(contexto => !importados.includes(contexto.id))
-        .forEach(contexto => {
 
-            const card = document.createElement("a");
+    const disponiveis = lista.filter(contexto => !importados.includes(contexto.id));
 
-            card.classList.add("box");
 
-            card.innerHTML = `
-                <img src="${contexto.imageUrl || 'img/error.png'}">
-                <h3>${contexto.name.toUpperCase()}</h3>
-            `;
+    if (disponiveis.length === 0) {
+        container.innerHTML = `
+            <p class="mensagem-vazia">
+                Nenhum tema disponível para importar
+            </p>
+        `;
+        return;
+    }
 
-            card.onclick = () => importarContexto(contexto.id);
 
-            container.appendChild(card);
+    disponiveis.forEach(contexto => {
 
-        });
 
+        const card = document.createElement("a");
+
+
+        card.classList.add("box");
+
+
+        card.innerHTML = `
+            <img src="${contexto.imageUrl || 'img/error.png'}">
+            <h3>${contexto.name.toUpperCase()}</h3>
+        `;
+
+
+        card.onclick = () => importarContexto(contexto.id);
+
+
+        container.appendChild(card);
+
+
+    });
 }
 
-
-function importarContexto(id){
+function importarContexto(id) {
 
     let contextos = JSON.parse(localStorage.getItem("contextosImportados")) || [];
 
-    if(!contextos.includes(id)){
+    if (!contextos.includes(id)) {
         contextos.push(id);
         localStorage.setItem("contextosImportados", JSON.stringify(contextos));
         alert("Tema importado!");
@@ -62,7 +81,7 @@ function importarContexto(id){
 
 }
 
-function filtrarContextos(){
+function filtrarContextos() {
 
     const texto = document.getElementById("buscarContexto").value.toLowerCase();
 

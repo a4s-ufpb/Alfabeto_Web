@@ -43,16 +43,7 @@ function zerarRanking() {
     
     esconderConfirmacaoZerarRanking();
 
-    const PARAGRAFO_CONFIRMACAO = document.getElementById('sucesso');
-
-    PARAGRAFO_CONFIRMACAO.innerHTML = "Ranking zerado com sucesso!"
-
-    const CONTAINER_PARAGRAFO = PARAGRAFO_CONFIRMACAO.parentElement;
-    CONTAINER_PARAGRAFO.style.display = 'block';
-
-    setTimeout(() => {
-        CONTAINER_PARAGRAFO.style.display = 'none';
-    }, 5000);
+    mostrarToast("Ranking zerado com sucesso")
 }
 
 function mostrarConfirmacaoZerarRanking() {
