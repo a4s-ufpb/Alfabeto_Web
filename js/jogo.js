@@ -8,6 +8,7 @@ let contadorDeErros = 0;
 let quantidadeDeTentativas = 0;
 const CONTEXTO_SELECIONADO = localStorage.getItem('contextoSelecionado');
 let CHALLENGES = [];
+const EDUCAPI_CHALLENGE_IMAGE_URL = "http://localhost:8080/v1/api/challenges";
 
 
 if (!CONTEXTO_SELECIONADO) {
@@ -33,6 +34,22 @@ function escolhaDoTeclado() {
         document.getElementById('consoantes').style.display = 'none';
         document.getElementById('alfabeto').style.display = 'block';
     }
+}
+
+function getChallengeImageUrl(challenge) {
+    if (!challenge) {
+        return "";
+    }
+
+    if (challenge.id !== undefined && challenge.id !== null && challenge.id !== "") {
+        return `${EDUCAPI_CHALLENGE_IMAGE_URL}/${challenge.id}/image`;
+    }
+
+    if (challenge.imageUrl && challenge.imageUrl !== "null") {
+        return challenge.imageUrl;
+    }
+
+    return "";
 }
 
 async function carregarChallenges() {
@@ -92,9 +109,10 @@ async function iniciarDesafio() {
     console.log("Palavra secreta sorteada:", palavraSecreta);
 
     const img = document.getElementById('imagem-jogo');
+    const imageUrl = getChallengeImageUrl(palavraSorteada);
 
-    if (palavraSorteada.imageUrl && palavraSorteada.imageUrl !== "null") {
-        img.src = palavraSorteada.imageUrl
+    if (imageUrl) {
+        img.src = imageUrl;
     } else {
         img.src = "img/error.png";
     }
