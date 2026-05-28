@@ -1,4 +1,5 @@
 let TODOS_CONTEXTOS = [];
+const EDUCAPI_CONTEXT_IMAGE_URL = "http://localhost:8080/v1/api/contexts";
 
 document.addEventListener("DOMContentLoaded", iniciar);
 
@@ -19,6 +20,22 @@ async function carregarContexts() {
 
     TODOS_CONTEXTOS = dados.content || [];
 
+}
+
+function getContextImageUrl(contexto) {
+    if (!contexto) {
+        return "img/error.png";
+    }
+
+    if (contexto.id !== undefined && contexto.id !== null && contexto.id !== "") {
+        return `${EDUCAPI_CONTEXT_IMAGE_URL}/${contexto.id}/image`;
+    }
+
+    if (contexto.imageUrl && contexto.imageUrl !== "null") {
+        return contexto.imageUrl;
+    }
+
+    return "img/error.png";
 }
 
 function mostrarContextos(){
@@ -59,7 +76,7 @@ function mostrarContextos(){
 
         card.innerHTML = `
             <button class="remover-contexto" onclick="removerContexto(event, ${contexto.id})">✖</button>
-            <img src="${contexto.imageUrl || 'img/error.png'}">
+            <img src="${getContextImageUrl(contexto)}">
             <h3>${contexto.name.toUpperCase()}</h3>
         `;
 
